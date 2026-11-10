@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* Dark is the default theme. The light theme is selected by data-theme="light"
+   on <html>, set by the toggle and by the inline script in app/layout.tsx. */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0b0e0c;
+  --surface: #121714;
+  --line: #3a463f;
+  --fg: #f0ebea;
+  --muted: #b7c4bb;
+  --accent: #46e08c;
+  --accent-fill: #46e08c;
+  --on-accent: #06120b;
+  --bg-opacity-high: 0.60;
+  --bg-opacity-low: 0.20;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #f5f7f5;
+  --surface: #ffffff;
+  --line: #7c897f;
+  --fg: #0b120d;
+  --muted: #414d46;
+  --accent: #0a6b33;
+  --accent-fill: #46e08c;
+  --on-accent: #06120b;
+  --bg-opacity-high: 0.40;
+  --bg-opacity-low: 0.20;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fill: var(--accent-fill);
+  --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
+  --radius-sharp: 2px;
+}
+
+@layer base {
+  html {
+    background-color: var(--canvas);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  section[id],
+  main[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  a[href],
+  button:not(:disabled),
+  summary,
+  select,
+  label[for],
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

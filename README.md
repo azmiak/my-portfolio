@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+A single-page personal portfolio for a student or fresh graduate. Next.js (App Router), TypeScript, Tailwind CSS.
+Dark theme by default, light theme on a toggle. No backend, no database, no analytics.
 
-First, run the development server:
+Design direction, dials and the reason for each decision are in `DESIGN.md`.
+
+## Install
+
+Requires Node.js 20.9 or newer.
+
+```bash
+npm install
+```
+
+## Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+`npm run typecheck` runs the TypeScript check on its own.
 
-To learn more about Next.js, take a look at the following resources:
+## Edit your content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Everything the site says lives in one file: `content/portfolio.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Replace every value in `[SQUARE BRACKETS]` with your own text.
+- Set a list to `[]` to hide a section. Its navigation entry disappears with it.
+- Optional fields (`demoUrl`, `repoUrl`, `url`, `year`, `location`, `image`, `availability`) render only when filled in. A commented example of `demoUrl` and `repoUrl` sits in the first project.
+- Replace `your-email@example.com`, and the GitHub and LinkedIn URLs, with your real ones.
+- Your photo: put a file in `public/images/`, then change `person.photo` (`src`, `alt`, `width`, `height`). The current image is a labeled placeholder.
+- Project screenshots are optional: add `image` to a project with a real screenshot. Without one, the project shows text only.
+- Set `site.url` once you know your domain, so Open Graph links resolve.
 
-## Deploy on Vercel
+Types for every field are in `content/types.ts`. Colors are CSS variables at the top of `app/globals.css`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy to Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push this folder to a GitHub repository.
+2. In Vercel, choose Add New, then Project, and import the repository.
+3. Keep the detected Next.js settings and select Deploy.
+4. After the first deploy, put the live address in `site.url` in `content/portfolio.ts` and push again.
+
+## Dependencies
+
+| Package | Why |
+|---|---|
+| `next` | The framework: routing, `next/image`, `next/font`, build. |
+| `react`, `react-dom` | Required by Next.js. |
+| `tailwindcss` | Utility CSS for layout and theme tokens. |
+| `@tailwindcss/postcss` | Connects Tailwind v4 to the Next.js build. |
+| `typescript` | Type checking. |
+| `@types/node`, `@types/react`, `@types/react-dom` | Type definitions for the above. |
+
+Fonts (IBM Plex Sans and IBM Plex Mono) load through `next/font/google`, which downloads them at build time and serves them from your own domain.
+
+## Structure
+
+```
+app/            layout, page, global styles and theme variables
+components/     one component per section, plus Header, Footer and small helpers
+content/        portfolio.ts (your content) and types.ts
+lib/ui.ts       shared button and link classes
+public/images/  placeholder portrait
+```
