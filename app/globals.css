@@ -13,8 +13,8 @@
   --accent: #46e08c;
   --accent-fill: #46e08c;
   --on-accent: #06120b;
-  --bg-opacity-high: 0.60;
-  --bg-opacity-low: 0.20;
+  --bg-opacity-high: 0.40;
+  --bg-opacity-low: 0.15;
 }
 
 :root[data-theme="light"] {
@@ -27,7 +27,7 @@
   --accent: #0a6b33;
   --accent-fill: #46e08c;
   --on-accent: #06120b;
-  --bg-opacity-high: 0.50;
+  --bg-opacity-high: 0.40;
   --bg-opacity-low: 0.15;
 }
 
