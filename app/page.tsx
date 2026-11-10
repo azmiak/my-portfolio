@@ -5,6 +5,7 @@ import { Experience } from "@/components/Experience";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { PageBackground } from "@/components/PageBackground";
 import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
 import { portfolio } from "@/content/portfolio";
@@ -41,9 +42,10 @@ export default function Home() {
   const has = (id: string) => sections.some((section) => section.id === id);
 
   return (
-    <>
+    <div className="relative min-h-screen">
+      <PageBackground />
       <Header name={person.name} items={sections.map(({ id, label }) => ({ id, label }))} />
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} className="relative z-10">
         <Hero person={person} hasProjects={has("projects")} email={contact.email} />
         {has("about") && <About index={indexOf("about")} about={about} />}
         {has("education") && <Education index={indexOf("education")} entries={education} />}
@@ -59,6 +61,6 @@ export default function Home() {
         <Contact index={indexOf("contact")} contact={contact} />
       </main>
       <Footer name={person.name} />
-    </>
+    </div>
   );
 }
